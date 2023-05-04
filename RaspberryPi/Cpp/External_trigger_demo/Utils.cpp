@@ -14,6 +14,7 @@
 
 #include "Utils.h"
 #include <time.h>
+#include <fmt/core.h>
 
 #define SAVE_FULL_DEPTH
 
@@ -84,6 +85,7 @@ bool camera_initFromFile(std::string filename, ArduCamHandle &cameraHandle, Ardu
 	// int ret_val = ArduCam_autoopen(cameraHandle, &cameraCfg);
 	if (ret_val == USB_CAMERA_NO_ERROR) {
 		//ArduCam_enableForceRead(cameraHandle);	//Force display image
+		fmt::print("configs_length = {}\n", configs_length);
 		for (int i = 0; i < configs_length; i++) {
 			uint32_t type = configs[i].type;
 			if (((type >> 16) & 0xFF) && ((type >> 16) & 0xFF) != cameraCfg.usbType)
@@ -103,6 +105,31 @@ bool camera_initFromFile(std::string filename, ArduCamHandle &cameraHandle, Ardu
 			case CONFIG_TYPE_VRCMD:
 				configBoard(cameraHandle, configs[i]);
 				break;
+			case CONFIG_TYPE_BITFIELD:
+				{
+					uint32_t regAddr = configs[i].params[0];
+					uint32_t val_mask = configs[i].params[1];
+					uint32_t val_set = configs[i].params[2];
+					uint32_t val_orig, val_new;
+					ArduCam_readSensorReg(cameraHandle, regAddr, &val_orig);
+					fmt::print("BITFIELD regAddr = 0x{:x} val_orig = 0x{:x} val_mask = 0x{:x} val_set = 0x{:x}",
+								regAddr, val_orig, val_mask, val_set);					
+					uint32_t m = 0x0001;
+					for (int b = 0; b < 32; b++)
+					{
+						if (m & val_mask)
+						{
+							val_new = val_set | (val_orig & ~val_mask);
+							ArduCam_writeSensorReg(cameraHandle, regAddr, val_new);
+							fmt::print(" val_new = 0x{:x}", val_new);
+							break;
+						}
+						m <<= 1;
+						val_set <<= 1;
+					}
+					fmt::print("\n");
+					break;
+				}
 			}
 		}
 		ArduCam_registerCtrls(cameraHandle, cam_cfgs.controls, cam_cfgs.controls_length);

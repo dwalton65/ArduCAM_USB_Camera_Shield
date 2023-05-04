@@ -26,6 +26,7 @@ TypeMap config_types[] = {
     {"REG", CONFIG_TYPE_REG},
     {"DELAY", CONFIG_TYPE_DELAY},
     {"VRCMD", CONFIG_TYPE_VRCMD},
+    {"BITFIELD", CONFIG_TYPE_BITFIELD},
     {0, 0},
 };
 
@@ -217,10 +218,10 @@ void dump_camera_parameter(CameraParam *camera_param){
 
 void dump_controls(CameraConfigs configs) {
     for (int i = 0; i < configs.controls_length; i++) {
-        LOG("MIN_VALUE  = %ld", configs.controls[i].min);
-        LOG("MAX_VALUE  = %ld", configs.controls[i].max);
+        LOG("MIN_VALUE  = %lld", configs.controls[i].min);
+        LOG("MAX_VALUE  = %lld", configs.controls[i].max);
         LOG("STEP       = %d", configs.controls[i].step);
-        LOG("DEF        = %ld", configs.controls[i].def);
+        LOG("DEF        = %lld", configs.controls[i].def);
         LOG("CTRL_NAME	= %s", configs.controls[i].name);
         LOG("FUNC_NAME	= %s", configs.controls[i].func);
         LOG("%s", configs.controls[i].code);

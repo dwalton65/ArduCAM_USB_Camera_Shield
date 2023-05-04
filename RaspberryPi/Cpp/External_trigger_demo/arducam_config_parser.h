@@ -51,6 +51,7 @@ extern "C" {
 #define CONFIG_TYPE_REG     0x0001
 #define CONFIG_TYPE_VRCMD   0x0002
 #define CONFIG_TYPE_DELAY   0x0003
+#define CONFIG_TYPE_BITFIELD   0x0004
 
 #define CONTROL_TYPE_MIN    0x0001
 #define CONTROL_TYPE_MAX    0x0002
