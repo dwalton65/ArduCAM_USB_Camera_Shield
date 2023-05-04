@@ -386,8 +386,8 @@ void getAndDisplaySingleFrame(ArduCamHandle handle,int index){
 		
 		cv::resize(rawImage,rawImage,cv::Size(640, 480), (0, 0), (0, 0), cv::INTER_LINEAR);
 	    cv::imshow(name, rawImage);
-		cvWaitKey(50);
-	    // cv::waitKey(50);
+		//cvWaitKey(50);
+	    cv::waitKey(50);
 		printf("End display.\n");
 	}else{
 		printf("Take picture fail,ret_val = %d\n",rtn_val);
@@ -489,8 +489,8 @@ int main(int argc,char **argv)
 			}
 #endif
 		}
-		// usleep( 1000 * 50);
-		cvWaitKey(10);
+		usleep( 1000 * 50);
+		//cvWaitKey(10);
 	}
 	
 	cv::destroyAllWindows();
