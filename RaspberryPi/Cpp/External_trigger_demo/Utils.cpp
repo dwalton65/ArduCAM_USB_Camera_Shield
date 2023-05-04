@@ -15,6 +15,8 @@
 #include "Utils.h"
 #include <time.h>
 
+#define SAVE_FULL_DEPTH
+
 void configBoard(ArduCamHandle &cameraHandle, Config config) {
 	uint8_t u8Buf[10];
 	for (uint32_t n = 0; n < config.params[3]; n++) {
@@ -203,6 +205,23 @@ cv::Mat RGB565toMat(Uint8* bytes, int width, int height, int color_mode) {
 }
 
 
+#ifdef SAVE_FULL_DEPTH
+#define MAKE_UINT16(c) 			(*((uint16_t *) &(c)))
+
+cv::Mat dBytesToMat(Uint8* bytes,int bit_width,int width,int height){
+    cv::Mat image = cv::Mat(height, width, CV_16UC1);
+    uint16_t pixel;
+    
+	for (uint32_t i = 0 ; i < (width * height * 2); i += 2)
+	{	
+		pixel = MAKE_UINT16(bytes[i]) << (16 - bit_width);	
+		image.data[i] = pixel & 0xff;
+		image.data[i+1] = pixel >> 8;
+	}
+
+    return image;
+}
+#else //SAVE_FULL_DEPTH
 cv::Mat dBytesToMat(Uint8* bytes, int bit_width, int width, int height) {
 	unsigned char* temp_data = (unsigned char*)malloc(width * height);
 	int index = 0;
@@ -215,6 +234,7 @@ cv::Mat dBytesToMat(Uint8* bytes, int bit_width, int width, int height) {
 	free(temp_data);
 	return image;
 }
+#endif //SAVE_FULL_DEPTH
 
 cv::Mat BytestoMat(Uint8* bytes, int width, int height)
 {
