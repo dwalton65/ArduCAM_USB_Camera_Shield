@@ -1,0 +1,11 @@
+.vs/
+*.cbk
+.vscode/
+*.code-workspace
+/build/**
+!/build/Data.tar.gz
+!/build/ImageTaken.tar.gz
+!/build/glade/
+!/build/glade/**
+
+*~
