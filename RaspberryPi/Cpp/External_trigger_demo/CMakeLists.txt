@@ -29,7 +29,7 @@ PRINT_VAR("json-c_DIR")
 #include_directories(${GTK_INCLUDE_DIRS})
 
 #Add more files here
-add_executable( ArduCam_Ext_Trigger_Demo ArduCam_Ext_Trigger_Demo.cpp ini.c arducam_config_parser.c )
+add_executable( ArduCam_Ext_Trigger_Demo ArduCam_Ext_Trigger_Demo.cpp ini.c arducam_config_parser.c Utils.cpp )
 
 #Specify the link directory
 #link_directories(${CMAKE_CURRENT_BINARY_DIR}/lib ${GTK_LIBRARY_DIRS})
