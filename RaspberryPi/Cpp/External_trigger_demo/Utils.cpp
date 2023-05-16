@@ -6,7 +6,7 @@
 #endif
 
 #if __linux__
-#include <arducam_config_parser.h>
+#include "arducam_config_parser.h"
 #include <ArduCamLib.h>
 #include <unistd.h>
 #include <stdlib.h>
