@@ -89,7 +89,7 @@ void getAndDisplaySingleFrame(ArduCamHandle handle,int index){
 #endif
 			printf("Camera%d,save image%ld.jpg.\n",index,total_frames[index]);
 			char imageName[50];
-			sprintf(imageName,"images%d/image%ld.jpg",index,total_frames[index]);
+			sprintf(imageName,"images%d/image%ld.png",index,total_frames[index]);
 
 			if(save_raw){
 				char rawName[50];
