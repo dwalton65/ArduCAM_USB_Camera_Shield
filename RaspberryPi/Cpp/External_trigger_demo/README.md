@@ -1,4 +1,28 @@
 # Note
+This is my updated version of the ArduCAM External_trigger_demo. 
+arducam_config_parser has been moved into the demo project, rather than a separate library.
+arducam_config_parser has been updated to allow the BITFIELD option in the camera configuration files.
+This allows the use of configuration files produced by the MT9F002_A14041 Register Wizard.
+
+# Compile the source code
+```console
+git clone git@github.com:dwalton65/ArduCAM_USB_Camera_Shield.git
+cd ArduCAM_USB_Camera_Shield/RaspberryPi/Cpp/External_trigger_demo
+mkdir build
+cd build
+
+# Configure
+cmake ..
+
+# Build
+cmake --build .
+
+# Run
+./ArduCam_Ext_Trigger_Demo <path/config-file-name>
+```
+# The following is the previous ArduCAM notes.
+
+# Note
 We have launched a new version of Demo, which is more concise and easy to use, please check for details:  
 [ArduCAM_USB_Camera_Shield_Cpp_Demo](https://github.com/ArduCAM/ArduCAM_USB_Camera_Shield_Cpp_Demo)  
 [ArduCAM_USB_Camera_Shield_Python_Demo](https://github.com/ArduCAM/ArduCAM_USB_Camera_Shield_Python_Demo)  
